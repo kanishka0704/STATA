@@ -1,0 +1,166 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_8.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 9 Sep 2025, 14:05:01
+
+{com}. import delimited "C:\Users\Aakash\Downloads\Salary_Data.csv"
+{res}{txt}(encoding automatically selected: UTF-8)
+{text}(6 vars, 6,704 obs)
+
+{com}. describe
+
+{txt}Contains data
+ Observations:{res}         6,704                  
+{txt}    Variables:{res}             6                  
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:age            }{txt}{bind: byte    }{bind:{txt}%8.0g     }{space 1}{bind:         }{bind:  }{res}{res}Age{p_end}
+{p 0 48}{bind:gender         }{txt}{bind: str6    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}Gender{p_end}
+{p 0 48}{bind:educationlevel }{txt}{bind: str17   }{bind:{txt}%17s      }{space 1}{bind:         }{bind:  }{res}{res}Education Level{p_end}
+{p 0 48}{bind:jobtitle       }{txt}{bind: str37   }{bind:{txt}%37s      }{space 1}{bind:         }{bind:  }{res}{res}Job Title{p_end}
+{p 0 48}{bind:yearsofexperi~e}{txt}{bind: float   }{bind:{txt}%9.0g     }{space 1}{bind:         }{bind:  }{res}{res}Years of Experience{p_end}
+{p 0 48}{bind:salary         }{txt}{bind: long    }{bind:{txt}%12.0g    }{space 1}{bind:         }{bind:  }{res}{res}Salary{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+
+{com}. tab gender
+
+     {txt}Gender {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+     Female {c |}{res}      3,014       44.97       44.97
+{txt}       Male {c |}{res}      3,674       54.82       99.79
+{txt}      Other {c |}{res}         14        0.21      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      6,702      100.00
+
+{com}. su
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 9}age {c |}{res}      6,702    33.62086    7.614633         21         62
+{txt}{space 6}gender {c |}{res}          0
+{txt}educationl~l {c |}{res}          0
+{txt}{space 4}jobtitle {c |}{res}          0
+{txt}yearsofexp~e {c |}{res}      6,701    8.094687    6.059003          0         34
+{txt}{hline 13}{c +}{hline 57}
+{space 6}salary {c |}{res}      6,699      115327    52786.18        350     250000
+
+{com}. tab gender,nolabel
+
+     {txt}Gender {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+     Female {c |}{res}      3,014       44.97       44.97
+{txt}       Male {c |}{res}      3,674       54.82       99.79
+{txt}      Other {c |}{res}         14        0.21      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      6,702      100.00
+
+{com}. encode gender,gen(gender1)
+
+. reg salary i.gender1
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     6,699
+{txt}{hline 13}{c +}{hline 34}   F(2, 6696)      = {res}    55.29
+{txt}       Model {c |} {res} 3.0322e+11         2  1.5161e+11   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 1.8360e+13     6,696  2.7419e+09   {txt}R-squared       ={res}    0.0162
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0160
+{txt}       Total {c |} {res} 1.8663e+13     6,698  2.7864e+09   {txt}Root MSE        =   {res}  52363
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      salary{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}gender1 {c |}
+{space 7}Male  {c |}{col 14}{res}{space 2} 13500.87{col 26}{space 2} 1287.146{col 37}{space 1}   10.49{col 46}{space 3}0.000{col 54}{space 4} 10977.66{col 67}{space 3} 16024.09
+{txt}{space 6}Other  {c |}{col 14}{res}{space 2} 17980.86{col 26}{space 2} 14027.19{col 37}{space 1}    1.28{col 46}{space 3}0.200{col 54}{space 4}-9516.903{col 67}{space 3} 45478.62
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}   107889{col 26}{space 2} 953.9564{col 37}{space 1}  113.10{col 46}{space 3}0.000{col 54}{space 4} 106018.9{col 67}{space 3} 109759.1
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. reg salary age yearsofexperience i.gender1
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     6,699
+{txt}{hline 13}{c +}{hline 34}   F(4, 6694)      = {res}  3357.81
+{txt}       Model {c |} {res} 1.2455e+13         4  3.1139e+12   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 6.2077e+12     6,694   927352210   {txt}R-squared       ={res}    0.6674
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.6672
+{txt}       Total {c |} {res} 1.8663e+13     6,698  2.7864e+09   {txt}Root MSE        =   {res}  30452
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           salary{col 19}{c |} Coefficient{col 31}  Std. err.{col 43}      t{col 51}   P>|t|{col 59}     [95% con{col 72}f. interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 14}age {c |}{col 19}{res}{space 2}-1893.705{col 31}{space 2} 141.2942{col 42}{space 1}  -13.40{col 51}{space 3}0.000{col 59}{space 4}-2170.687{col 72}{space 3}-1616.723
+{txt}yearsofexperience {c |}{col 19}{res}{space 2} 9257.886{col 31}{space 2} 177.4498{col 42}{space 1}   52.17{col 51}{space 3}0.000{col 59}{space 4} 8910.028{col 72}{space 3} 9605.744
+{txt}{space 17} {c |}
+{space 10}gender1 {c |}
+{space 12}Male  {c |}{col 19}{res}{space 2} 5811.091{col 31}{space 2} 754.1267{col 42}{space 1}    7.71{col 51}{space 3}0.000{col 59}{space 4} 4332.763{col 72}{space 3}  7289.42
+{txt}{space 11}Other  {c |}{col 19}{res}{space 2}-52265.76{col 31}{space 2} 8192.971{col 42}{space 1}   -6.38{col 51}{space 3}0.000{col 59}{space 4}-68326.59{col 72}{space 3}-36204.93
+{txt}{space 17} {c |}
+{space 12}_cons {c |}{col 19}{res}{space 2} 100978.4{col 31}{space 2} 3451.602{col 42}{space 1}   29.26{col 51}{space 3}0.000{col 59}{space 4} 94212.14{col 72}{space 3} 107744.6
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. encode educationlevel,gen( educationlevel1)
+
+. reg salary educationlevel1#i.gender1 i.gender1 i.educationlevel1
+{txt}{p 0 6 2}note: {bf:1b.educationlevel1#3.gender1} identifies no observations in the sample.{p_end}
+{p 0 6 2}note: {bf:2.educationlevel1#3.gender1} identifies no observations in the sample.{p_end}
+{p 0 6 2}note: {bf:4.educationlevel1#3.gender1} identifies no observations in the sample.{p_end}
+{p 0 6 2}note: {bf:5.educationlevel1#3.gender1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:6.educationlevel1#3.gender1} identifies no observations in the sample.{p_end}
+{p 0 6 2}note: {bf:7.educationlevel1#1b.gender1} identifies no observations in the sample.{p_end}
+{p 0 6 2}note: {bf:7.educationlevel1#2.gender1} omitted because of collinearity.{p_end}
+{p 0 6 2}note: {bf:7.educationlevel1#3.gender1} identifies no observations in the sample.{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}     6,698
+{txt}{hline 13}{c +}{hline 34}   F(14, 6683)     = {res}   490.20
+{txt}       Model {c |} {res} 9.4553e+12        14  6.7538e+11   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 9.2077e+12     6,683  1.3778e+09   {txt}R-squared       ={res}    0.5066
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.5056
+{txt}       Total {c |} {res} 1.8663e+13     6,697  2.7868e+09   {txt}Root MSE        =   {res}  37118
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                  salary{col 26}{c |} Coefficient{col 38}  Std. err.{col 50}      t{col 58}   P>|t|{col 66}     [95% con{col 79}f. interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 1}educationlevel1#gender1 {c |}
+{space 7}Bachelor's#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 1}Bachelor's Degree#Male  {c |}{col 26}{res}{space 2}-9848.087{col 38}{space 2}  3208.98{col 49}{space 1}   -3.07{col 58}{space 3}0.002{col 66}{space 4}-16138.71{col 79}{space 3}-3557.462
+{txt}Bachelor's Degree#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 7}High School#Male  {c |}{col 26}{res}{space 2}-7753.276{col 38}{space 2} 4550.482{col 49}{space 1}   -1.70{col 58}{space 3}0.088{col 66}{space 4}-16673.67{col 79}{space 3}  1167.12
+{txt}{space 6}High School#Other  {c |}{col 26}{res}{space 2} 41905.89{col 38}{space 2} 28474.12{col 49}{space 1}    1.47{col 58}{space 3}0.141{col 66}{space 4}-13912.47{col 79}{space 3} 97724.26
+{txt}{space 10}Master's#Male  {c |}{col 26}{res}{space 2}-24781.23{col 38}{space 2} 5493.124{col 49}{space 1}   -4.51{col 58}{space 3}0.000{col 66}{space 4}-35549.51{col 79}{space 3}-14012.96
+{txt}{space 9}Master's#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 3}Master's Degree#Male  {c |}{col 26}{res}{space 2}  8086.84{col 38}{space 2} 3364.704{col 49}{space 1}    2.40{col 58}{space 3}0.016{col 66}{space 4} 1490.946{col 79}{space 3} 14682.73
+{txt}{space 2}Master's Degree#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 15}PhD#Male  {c |}{col 26}{res}{space 2} -7877.34{col 38}{space 2} 3482.544{col 49}{space 1}   -2.26{col 58}{space 3}0.024{col 66}{space 4}-14704.24{col 79}{space 3}-1050.443
+{txt}{space 14}PhD#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 13}phD#Female  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 15}phD#Male  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 14}phD#Other  {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (empty)
+{space 24} {c |}
+{space 17}gender1 {c |}
+{space 19}Male  {c |}{col 26}{res}{space 2} 16377.98{col 38}{space 2}  2787.53{col 49}{space 1}    5.88{col 58}{space 3}0.000{col 66}{space 4} 10913.53{col 79}{space 3} 21842.43
+{txt}{space 18}Other  {c |}{col 26}{res}{space 2} 47287.39{col 38}{space 2} 26276.84{col 49}{space 1}    1.80{col 58}{space 3}0.072{col 66}{space 4}-4223.587{col 79}{space 3} 98798.38
+{txt}{space 24} {c |}
+{space 9}educationlevel1 {c |}
+{space 6}Bachelor's Degree  {c |}{col 26}{res}{space 2}-33262.24{col 38}{space 2} 2521.651{col 49}{space 1}  -13.19{col 58}{space 3}0.000{col 66}{space 4}-38205.48{col 79}{space 3}   -28319
+{txt}{space 12}High School  {c |}{col 26}{res}{space 2}-83786.21{col 38}{space 2} 3215.657{col 49}{space 1}  -26.06{col 58}{space 3}0.000{col 66}{space 4}-90089.92{col 79}{space 3}-77482.49
+{txt}{space 15}Master's  {c |}{col 26}{res}{space 2} 45658.75{col 38}{space 2} 3431.443{col 49}{space 1}   13.31{col 58}{space 3}0.000{col 66}{space 4} 38932.03{col 79}{space 3} 52385.47
+{txt}{space 8}Master's Degree  {c |}{col 26}{res}{space 2}-436.6482{col 38}{space 2} 2537.082{col 49}{space 1}   -0.17{col 58}{space 3}0.863{col 66}{space 4}-5410.138{col 79}{space 3} 4536.842
+{txt}{space 20}PhD  {c |}{col 26}{res}{space 2} 45724.04{col 38}{space 2} 2762.079{col 49}{space 1}   16.55{col 58}{space 3}0.000{col 66}{space 4} 40309.48{col 79}{space 3}  51138.6
+{txt}{space 20}phD  {c |}{col 26}{res}{space 2}-10920.23{col 38}{space 2} 37157.67{col 49}{space 1}   -0.29{col 58}{space 3}0.769{col 66}{space 4}-83761.12{col 79}{space 3} 61920.65
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2} 114542.3{col 38}{space 2}  2202.57{col 49}{space 1}   52.00{col 58}{space 3}0.000{col 66}{space 4} 110224.5{col 79}{space 3}   118860
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_8.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 9 Sep 2025, 14:10:28
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

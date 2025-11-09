@@ -1,0 +1,806 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_13.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}11 Sep 2025, 11:22:57
+
+{com}. use "C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\DS0001\36151-0001-Data.dta"
+{txt}(India Human Development Survey-II (IHDS-II), 2011-12, Individual)
+
+{com}. tab RO3
+
+{txt}HQ4 2.3 Sex {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+     Male 1 {c |}{res}    102,062       49.89       49.89
+{txt}   Female 2 {c |}{res}    102,506       50.11      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    204,568      100.00
+
+{com}. drop if RO3==1
+{txt}(102,062 observations deleted)
+
+{com}. tab RO7
+
+     {txt}HQ4 2.7 Primary {c |}
+     Activity Status {c |}      Freq.     Percent        Cum.
+{hline 21}{c +}{hline 35}
+       Cultivation 1 {c |}{res}      2,722        2.66        2.66
+{txt}         Allied ag 2 {c |}{res}        214        0.21        2.86
+{txt}    Ag wage labour 3 {c |}{res}      4,338        4.23        7.10
+{txt} Nonag wage labour 4 {c |}{res}      3,198        3.12       10.22
+{txt}Artisan/indpt work 5 {c |}{res}        247        0.24       10.46
+{txt}    Small business 6 {c |}{res}        935        0.91       11.37
+{txt}Organized Business 7 {c |}{res}         62        0.06       11.43
+{txt}          Salaried 8 {c |}{res}      2,843        2.77       14.20
+{txt}        Profession 9 {c |}{res}        127        0.12       14.33
+{txt}          Retired 10 {c |}{res}        558        0.54       14.87
+{txt}        Housework 11 {c |}{res}     46,901       45.76       60.63
+{txt}          Student 12 {c |}{res}     26,132       25.49       86.12
+{txt}       Unemployed 13 {c |}{res}      1,057        1.03       87.15
+{txt}  Too young/Unfit 14 {c |}{res}     12,461       12.16       99.31
+{txt}           Others 15 {c |}{res}        709        0.69      100.00
+{txt}{hline 21}{c +}{hline 35}
+               Total {c |}{res}    102,504      100.00
+
+{com}. gen female_occupation=0 if RO7==11
+{txt}(55,606 missing values generated)
+
+{com}. replace female_occupation=1 if RO7!=11
+{txt}(55,606 real changes made)
+
+{com}. tab RO7
+
+     {txt}HQ4 2.7 Primary {c |}
+     Activity Status {c |}      Freq.     Percent        Cum.
+{hline 21}{c +}{hline 35}
+       Cultivation 1 {c |}{res}      2,722        2.66        2.66
+{txt}         Allied ag 2 {c |}{res}        214        0.21        2.86
+{txt}    Ag wage labour 3 {c |}{res}      4,338        4.23        7.10
+{txt} Nonag wage labour 4 {c |}{res}      3,198        3.12       10.22
+{txt}Artisan/indpt work 5 {c |}{res}        247        0.24       10.46
+{txt}    Small business 6 {c |}{res}        935        0.91       11.37
+{txt}Organized Business 7 {c |}{res}         62        0.06       11.43
+{txt}          Salaried 8 {c |}{res}      2,843        2.77       14.20
+{txt}        Profession 9 {c |}{res}        127        0.12       14.33
+{txt}          Retired 10 {c |}{res}        558        0.54       14.87
+{txt}        Housework 11 {c |}{res}     46,901       45.76       60.63
+{txt}          Student 12 {c |}{res}     26,132       25.49       86.12
+{txt}       Unemployed 13 {c |}{res}      1,057        1.03       87.15
+{txt}  Too young/Unfit 14 {c |}{res}     12,461       12.16       99.31
+{txt}           Others 15 {c |}{res}        709        0.69      100.00
+{txt}{hline 21}{c +}{hline 35}
+               Total {c |}{res}    102,504      100.00
+
+{com}. tab female_occupation
+
+{txt}female_occu {c |}
+     pation {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}     46,901       45.75       45.75
+{txt}          1 {c |}{res}     55,606       54.25      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    102,507      100.00
+
+{com}. label variable female_occupation "female_occu_status"
+
+. label define partoflabour 1 "partoflabor" 0 "notinlabor"
+
+. label values female_occupation partoflabour
+
+. tab female_occupation
+
+{txt}female_occu {c |}
+    _status {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+ notinlabor {c |}{res}     46,901       45.75       45.75
+{txt}partoflabor {c |}{res}     55,606       54.25      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}    102,507      100.00
+
+{com}. describe
+
+{txt}Contains data from {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\DS0001\36151-0001-Data.dta
+{txt} Observations:{res}       102,507                  India Human Development Survey-II (IHDS-II), 2011-12, Individual
+{txt}    Variables:{res}           338                  24 Jul 2015 09:44
+{txt}{hline}
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+{hline}
+{p 0 48}{res}{bind:SURVEY         }{txt}{bind: int     }{bind:{txt}%9.0f     }{space 1}{bind:SURVEY   }{bind:  }{res}{res}IHDS-I (2005) or IHDS-II (2012){p_end}
+{p 0 48}{bind:STATEID        }{txt}{bind: int     }{bind:{txt}%21.0f    }{space 1}{bind:STATEID  }{bind:  }{res}{res}State code{p_end}
+{p 0 48}{bind:DISTID         }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}District code{p_end}
+{p 0 48}{bind:PSUID          }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}PSU: village/neighborhood code{p_end}
+{p 0 48}{bind:HHID           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}Household ID (3-digit){p_end}
+{p 0 48}{bind:HHSPLITID      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}Split household ID{p_end}
+{p 0 48}{bind:PERSONID       }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.1 Roster ID within 2012 household{p_end}
+{p 0 48}{bind:IDPSU          }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}PSU id unique 6 digit long int =cluster{p_end}
+{p 0 48}{bind:IDHH           }{txt}{bind: str10   }{bind:{txt}%10s      }{space 1}{bind:         }{bind:  }{res}{res}Household id, unique 10 byte string{p_end}
+{p 0 48}{bind:IDPERSON       }{txt}{bind: str12   }{bind:{txt}%12s      }{space 1}{bind:         }{bind:  }{res}{res}Person id, unique 12 byte{p_end}
+{p 0 48}{bind:WT             }{txt}{bind: double  }{bind:{txt}%15.8f    }{space 1}{bind:         }{bind:  }{res}{res}Weights for 2012{p_end}
+{p 0 48}{bind:FWT            }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}Integer weights for 2012{p_end}
+{p 0 48}{bind:DIST01         }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}H1sp: District ID Census 2001{p_end}
+{p 0 48}{bind:DISTRICT       }{txt}{bind: int     }{bind:{txt}%27.0f    }{space 1}{bind:DISTRICT }{bind:  }{res}{res}2001 Census state id + district id, labeled{p_end}
+{p 0 48}{bind:RO3            }{txt}{bind: int     }{bind:{txt}%8.0f     }{space 1}{bind:RO3      }{bind:  }{res}{res}HQ4 2.3 Sex{p_end}
+{p 0 48}{bind:RO4            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:RO4      }{bind:  }{res}{res}HQ4 2.4 Relationship to head{p_end}
+{p 0 48}{bind:RO5            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 Age{p_end}
+{p 0 48}{bind:RO6            }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:RO6      }{bind:  }{res}{res}HQ4 2.6 Marital Status{p_end}
+{p 0 48}{bind:RO7            }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:RO7      }{bind:  }{res}{res}HQ4 2.7 Primary Activity Status{p_end}
+{p 0 48}{bind:RO8            }{txt}{bind: int     }{bind:{txt}%47.0f    }{space 1}{bind:RO8      }{bind:  }{res}{res}HQ4 2.8 Spouse's ID{p_end}
+{p 0 48}{bind:RO9            }{txt}{bind: int     }{bind:{txt}%47.0f    }{space 1}{bind:RO9      }{bind:  }{res}{res}HQ4 2.9 Father's ID{p_end}
+{p 0 48}{bind:RO10           }{txt}{bind: int     }{bind:{txt}%47.0f    }{space 1}{bind:RO10     }{bind:  }{res}{res}HQ4 2.1 Mother's ID{p_end}
+{p 0 48}{bind:FM1            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:FM1      }{bind:  }{res}{res}HQ7 5.1 Any owned or cultivated{p_end}
+{p 0 48}{bind:FM36Y          }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:FM36Y    }{bind:  }{res}{res}HQ10 5.36 Own farm work{p_end}
+{p 0 48}{bind:FM37           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ10 5.37 Farm labour: days/year{p_end}
+{p 0 48}{bind:FM38           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ10 5.38 Farm: hours/day max=16{p_end}
+{p 0 48}{bind:FMHOURS        }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ10 5.37-38 Farm: hours/year max=4000{p_end}
+{p 0 48}{bind:WKFARM         }{txt}{bind: int     }{bind:{txt}%57.0f    }{space 1}{bind:WKFARM   }{bind:  }{res}{res}HQ14-16 fm12+ work participation farm{p_end}
+{p 0 48}{bind:FM39AY         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:FM39AY   }{bind:  }{res}{res}HQ10 5.39a Farm work: is decision maker{p_end}
+{p 0 48}{bind:AN1            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:AN1      }{bind:  }{res}{res}HQ11 6.1 Owns livestock{p_end}
+{p 0 48}{bind:AN5Y           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:AN5Y     }{bind:  }{res}{res}HQ11 6.5 Animal care work{p_end}
+{p 0 48}{bind:AN6            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:AN6      }{bind:  }{res}{res}HQ11 6.6 Animal care: Frequency{p_end}
+{p 0 48}{bind:AN7Y           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:AN7Y     }{bind:  }{res}{res}HQ11 6.7 Animal care: is decision maker{p_end}
+{p 0 48}{bind:NF1            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:NF1      }{bind:  }{res}{res}HQ14 8.1 Any non-farm business, corrected{p_end}
+{p 0 48}{bind:NFBN1          }{txt}{bind: int     }{bind:{txt}%19.0f    }{space 1}{bind:NFBN1    }{bind:  }{res}{res}HQ14 8(1) Business1: 1st business{p_end}
+{p 0 48}{bind:NF9            }{txt}{bind: int     }{bind:{txt}%32.0f    }{space 1}{bind:NF9      }{bind:  }{res}{res}HQ14 8.9 Business1: is worker{p_end}
+{p 0 48}{bind:NF12           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ16 8.52 Business1: days max=365{p_end}
+{p 0 48}{bind:NF13           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14 8.13 Business1: hours/day max=16{p_end}
+{p 0 48}{bind:NF15Y          }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:NF15Y    }{bind:  }{res}{res}HQ14 8.15 Business #1: is decision maker{p_end}
+{p 0 48}{bind:NFBN21         }{txt}{bind: int     }{bind:{txt}%19.0f    }{space 1}{bind:NFBN21   }{bind:  }{res}{res}HQ15 8(2) Business2: 2nd business{p_end}
+{p 0 48}{bind:NF29           }{txt}{bind: int     }{bind:{txt}%32.0f    }{space 1}{bind:NF29     }{bind:  }{res}{res}HQ15 8.29 Business2: is worker{p_end}
+{p 0 48}{bind:NF32           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ15 8.32 Business1: days max=365{p_end}
+{p 0 48}{bind:NF33           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ15 8.33 Business2: hours/day max=16{p_end}
+{p 0 48}{bind:NF35Y          }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:NF35Y    }{bind:  }{res}{res}HQ15 8.35 Business #2: is decision maker{p_end}
+{p 0 48}{bind:NFBN41         }{txt}{bind: int     }{bind:{txt}%19.0f    }{space 1}{bind:NFBN41   }{bind:  }{res}{res}HQ16 8(3) Business3: 3rd business{p_end}
+{p 0 48}{bind:NF49           }{txt}{bind: int     }{bind:{txt}%32.0f    }{space 1}{bind:NF49     }{bind:  }{res}{res}HQ16 8.49 Business3: is worker{p_end}
+{p 0 48}{bind:NF52           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ16 8.52 Business3: days/year{p_end}
+{p 0 48}{bind:NF53           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ16 8.53 Business3: hours/day max=16{p_end}
+{p 0 48}{bind:NFDAYS         }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14-16 nf12+ days per year all businesses{p_end}
+{p 0 48}{bind:NFHOURS        }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14-16 nf12+ hours per year all businesses{p_end}
+{p 0 48}{bind:NF55Y          }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:NF55Y    }{bind:  }{res}{res}HQ16 8.55 Business #3: is decision maker{p_end}
+{p 0 48}{bind:IN11S1         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S1   }{bind:  }{res}{res}HQ17 9.11-1 Old Age Pension any income{p_end}
+{p 0 48}{bind:IN13S1         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-1 Old Age Pension Rs{p_end}
+{p 0 48}{bind:IN11S2         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S2   }{bind:  }{res}{res}HQ17 9.11-2 Widows Pension any income{p_end}
+{p 0 48}{bind:IN13S2         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-2 Widows Pension Rs. year{p_end}
+{p 0 48}{bind:IN11S3         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S3   }{bind:  }{res}{res}HQ17 9.11-3 Maternity Benefit any income{p_end}
+{p 0 48}{bind:IN13S3         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-3 Maternity Benefit Rs{p_end}
+{p 0 48}{bind:IN11S4         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S4   }{bind:  }{res}{res}HQ17 9.11-4 Disability Pension any income{p_end}
+{p 0 48}{bind:IN13S4         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-4 Disability Pension Rs{p_end}
+{p 0 48}{bind:IN11S5         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S5   }{bind:  }{res}{res}HQ17 9.11-5 Annapurna any income{p_end}
+{p 0 48}{bind:IN13S5         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-5 Annapurna Rs{p_end}
+{p 0 48}{bind:IN11S6         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S6   }{bind:  }{res}{res}HQ17 9.11-6 Other Government any income{p_end}
+{p 0 48}{bind:IN13S6         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-6 Other Government Rs{p_end}
+{p 0 48}{bind:IN11S7         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S7   }{bind:  }{res}{res}HQ17 9.11-7 NGOs any income{p_end}
+{p 0 48}{bind:IN13S7         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-7 NGOs Rs{p_end}
+{p 0 48}{bind:IN11S8         }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:IN11S8   }{bind:  }{res}{res}HQ17 9.11-8 other{p_end}
+{p 0 48}{bind:IN13S8         }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.13-8 other Rs{p_end}
+{p 0 48}{bind:IN18           }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.18 NREGA card number{p_end}
+{p 0 48}{bind:IN19           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.19 NREGA: N members on card{p_end}
+{p 0 48}{bind:IN20           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.20 NREGA: N days eligible{p_end}
+{p 0 48}{bind:IN21           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.21 NREGA: N days worked{p_end}
+{p 0 48}{bind:IN22           }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:IN22     }{bind:  }{res}{res}HQ18 9.22 NREGA: why not worked{p_end}
+{p 0 48}{bind:IN23           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.23 NREGA: 1st worker{p_end}
+{p 0 48}{bind:IN24           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ18 9.24 NREGA: 2nd worker{p_end}
+{p 0 48}{bind:ED2            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:ED2      }{bind:  }{res}{res}HQ19 11.2 Education: Literacy{p_end}
+{p 0 48}{bind:ED3            }{txt}{bind: int     }{bind:{txt}%8.0f     }{space 1}{bind:ED3      }{bind:  }{res}{res}HQ19 11.3 Education: English ability{p_end}
+{p 0 48}{bind:ED4            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:ED4      }{bind:  }{res}{res}HQ19 11.4 Education: Attended school{p_end}
+{p 0 48}{bind:ED5            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:ED5      }{bind:  }{res}{res}HQ19 11.5 Education: Enrolled now{p_end}
+{p 0 48}{bind:ED6            }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:ED6      }{bind:  }{res}{res}HQ19 11.6 Education: Completed Years, never,<1=0{p_end}
+{p 0 48}{bind:EDUC7          }{txt}{bind: int     }{bind:{txt}%21.0f    }{space 1}{bind:EDUC7    }{bind:  }{res}{res}HQ19 11.4,6 Education: Completed Years, 7cats{p_end}
+{p 0 48}{bind:EDUNDER1       }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:EDUNDER1 }{bind:  }{res}{res}HQ19 11.6 Education: under 1 year{p_end}
+{p 0 48}{bind:ED7            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:ED7      }{bind:  }{res}{res}HQ19 11.7 Education: Ever repeated{p_end}
+{p 0 48}{bind:ED8            }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}HQ19 11.8 Education: Secondary class{p_end}
+{p 0 48}{bind:ED9            }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:ED9      }{bind:  }{res}{res}HQ19 11.9 Education: post secondary{p_end}
+{p 0 48}{bind:ED10           }{txt}{bind: int     }{bind:{txt}%27.0f    }{space 1}{bind:ED10     }{bind:  }{res}{res}HQ19 11.1 Education: Post 2nd subject{p_end}
+{p 0 48}{bind:ED11           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:ED11     }{bind:  }{res}{res}HQ19 11.11 Education: College/vocational school{p_end}
+{p 0 48}{bind:ED12           }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:ED12     }{bind:  }{res}{res}HQ19 11.12 Education: Highest degree{p_end}
+{p 0 48}{bind:ED13           }{txt}{bind: str3    }{bind:{txt}%9s       }{space 1}{bind:         }{bind:  }{res}{res}HQ19 11.13 Education: Degree class{p_end}
+{p 0 48}{bind:MM7Y           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MM7Y     }{bind:  }{res}{res}HQ22 13.7 uses computer{p_end}
+{p 0 48}{bind:MM8            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MM8      }{bind:  }{res}{res}HQ22 13.8 Computer: internet, e-mail{p_end}
+{p 0 48}{bind:MM9            }{txt}{bind: int     }{bind:{txt}%21.0f    }{space 1}{bind:MM9      }{bind:  }{res}{res}HQ22 13.9 Computer: Mostly where?{p_end}
+{p 0 48}{bind:MM12Y          }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MM12Y    }{bind:  }{res}{res}HQ22 13.12 owns mobile{p_end}
+{p 0 48}{bind:MM13           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MM13     }{bind:  }{res}{res}HQ22 13.13 Mobile: internet, e-mail{p_end}
+{p 0 48}{bind:MM14           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MM14     }{bind:  }{res}{res}HQ22 13.14 Mobile: SMS{p_end}
+{p 0 48}{bind:TA3            }{txt}{bind: int     }{bind:{txt}%18.0f    }{space 1}{bind:TA3      }{bind:  }{res}{res}HQ34 26.3 Test child: Ever school{p_end}
+{p 0 48}{bind:TA4            }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ34 26.4 Test child: Class{p_end}
+{p 0 48}{bind:TA5            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:TA5      }{bind:  }{res}{res}HQ34 26.5 Test child: Enjoys school{p_end}
+{p 0 48}{bind:TA6            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:TA6      }{bind:  }{res}{res}HQ34 26.6 Test child: Teacher nice{p_end}
+{p 0 48}{bind:TA8A           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TA8A     }{bind:  }{res}{res}HQ34 26.8 Test: Reading language{p_end}
+{p 0 48}{bind:TA8B           }{txt}{bind: int     }{bind:{txt}%13.0f    }{space 1}{bind:TA8B     }{bind:  }{res}{res}HQ34 26.8 Test: Reading level{p_end}
+{p 0 48}{bind:TA9A           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TA9A     }{bind:  }{res}{res}HQ34 26.9 Test: Math language{p_end}
+{p 0 48}{bind:TA9B           }{txt}{bind: int     }{bind:{txt}%18.0f    }{space 1}{bind:TA9B     }{bind:  }{res}{res}HQ34 26.9 Test: Math level{p_end}
+{p 0 48}{bind:TA10A          }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TA10A    }{bind:  }{res}{res}HQ34 26.10 Test: Writing language{p_end}
+{p 0 48}{bind:TA10B          }{txt}{bind: int     }{bind:{txt}%14.0f    }{space 1}{bind:TA10B    }{bind:  }{res}{res}HQ34 26.10 Test: Writing level{p_end}
+{p 0 48}{bind:CS3            }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:CS3      }{bind:  }{res}{res}EQ4 2.3 In School / College{p_end}
+{p 0 48}{bind:CS3Y           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CS3Y     }{bind:  }{res}{res}EQ4 2.3 In School/ College, yes/no{p_end}
+{p 0 48}{bind:CS4            }{txt}{bind: int     }{bind:{txt}%31.0f    }{space 1}{bind:CS4      }{bind:  }{res}{res}EQ4 2.4 School type{p_end}
+{p 0 48}{bind:CS5            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ4 2.5 School distance (Km){p_end}
+{p 0 48}{bind:CS6            }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:CS6      }{bind:  }{res}{res}EQ4 2.6 Standard (years) <1=0{p_end}
+{p 0 48}{bind:CS7            }{txt}{bind: int     }{bind:{txt}%30.0f    }{space 1}{bind:CS7      }{bind:  }{res}{res}EQ4 2.7 Course of study if above 10 standard{p_end}
+{p 0 48}{bind:CS8            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:CS8      }{bind:  }{res}{res}EQ4 2.8 Medium of instruction{p_end}
+{p 0 48}{bind:CS9            }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:CS9      }{bind:  }{res}{res}EQ4 2.9 Year English taught{p_end}
+{p 0 48}{bind:CS10           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ4 2.10 School hours/week{p_end}
+{p 0 48}{bind:CS11           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ4 2.11 Homework hours/week{p_end}
+{p 0 48}{bind:CS12           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ4 2.12 private Tuition hours/week{p_end}
+{p 0 48}{bind:CS13           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ4 2.13 Days/month absent{p_end}
+{p 0 48}{bind:CS16           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.16 Vocational Classes hours/week{p_end}
+{p 0 48}{bind:CS17           }{txt}{bind: int     }{bind:{txt}%25.0f    }{space 1}{bind:CS17     }{bind:  }{res}{res}EQ5 2.17 Standard completed{p_end}
+{p 0 48}{bind:CS18           }{txt}{bind: int     }{bind:{txt}%16.0f    }{space 1}{bind:CS18     }{bind:  }{res}{res}EQ5 2.18 Current Prog type{p_end}
+{p 0 48}{bind:CS19           }{txt}{bind: int     }{bind:{txt}%9.0f     }{space 1}{bind:CS19     }{bind:  }{res}{res}EQ5 2.19 Institution type{p_end}
+{p 0 48}{bind:CS20           }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:CS20     }{bind:  }{res}{res}EQ5 2.20 Vocational course{p_end}
+{p 0 48}{bind:CS21           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CS21     }{bind:  }{res}{res}EQ5 2.21 Free books{p_end}
+{p 0 48}{bind:CS22           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CS22     }{bind:  }{res}{res}EQ5 2.22 School fees by Government{p_end}
+{p 0 48}{bind:CS23           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CS23     }{bind:  }{res}{res}EQ5 2.23 Free uniform{p_end}
+{p 0 48}{bind:CS24           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.24 Scholarship (rupees){p_end}
+{p 0 48}{bind:CS25           }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.25 School fees (in rupees){p_end}
+{p 0 48}{bind:CS26           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.26 Books uniform Rs{p_end}
+{p 0 48}{bind:CS27           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.27 Bus Rs{p_end}
+{p 0 48}{bind:CS28           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ5 2.28 private tuition Rs{p_end}
+{p 0 48}{bind:CH2            }{txt}{bind: int     }{bind:{txt}%18.0f    }{space 1}{bind:CH2      }{bind:  }{res}{res}EQ6 3.2 Child: School enrollment{p_end}
+{p 0 48}{bind:CH3            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ6 3.3 Child: Start Age in years{p_end}
+{p 0 48}{bind:CH4A           }{txt}{bind: int     }{bind:{txt}%19.0f    }{space 1}{bind:CH4A     }{bind:  }{res}{res}EQ6 3.4 Child: School choice reason 1{p_end}
+{p 0 48}{bind:CH4B           }{txt}{bind: int     }{bind:{txt}%19.0f    }{space 1}{bind:CH4B     }{bind:  }{res}{res}EQ6 3.4 Child: School choice reason 2{p_end}
+{p 0 48}{bind:CH5            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH5      }{bind:  }{res}{res}EQ6 3.5 Child: School admission difficult{p_end}
+{p 0 48}{bind:CH6            }{txt}{bind: int     }{bind:{txt}%14.0f    }{space 1}{bind:CH6      }{bind:  }{res}{res}EQ6 3.6 Child: Teacher attendance{p_end}
+{p 0 48}{bind:CH7            }{txt}{bind: int     }{bind:{txt}%8.0f     }{space 1}{bind:CH7      }{bind:  }{res}{res}EQ6 3.7 Child: Teacher gender{p_end}
+{p 0 48}{bind:CH8            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH8      }{bind:  }{res}{res}EQ6 3.8 Child: Local teacher{p_end}
+{p 0 48}{bind:CH9            }{txt}{bind: int     }{bind:{txt}%14.0f    }{space 1}{bind:CH9      }{bind:  }{res}{res}EQ6 3.9 Child: Fair Teacher{p_end}
+{p 0 48}{bind:CH10           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:CH10     }{bind:  }{res}{res}EQ6 3.10 Child: Good Teacher{p_end}
+{p 0 48}{bind:CH11           }{txt}{bind: int     }{bind:{txt}%14.0f    }{space 1}{bind:CH11     }{bind:  }{res}{res}EQ6 3.11 Child: Biased Teacher{p_end}
+{p 0 48}{bind:CH12           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH12     }{bind:  }{res}{res}EQ6 3.12 Child: PTA participation{p_end}
+{p 0 48}{bind:CH13           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH13     }{bind:  }{res}{res}EQ6 3.13 Child: PTA attendance{p_end}
+{p 0 48}{bind:CH14           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ6 3.14 Child: # teacher discuss{p_end}
+{p 0 48}{bind:CH15           }{txt}{bind: int     }{bind:{txt}%21.0f    }{space 1}{bind:CH15     }{bind:  }{res}{res}EQ6 3.15 Child: Average student{p_end}
+{p 0 48}{bind:CH16           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:CH16     }{bind:  }{res}{res}EQ6 3.16 Child: School enjoyment{p_end}
+{p 0 48}{bind:CH17           }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ6 3.17 Child: # Repeats{p_end}
+{p 0 48}{bind:CH18           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH18     }{bind:  }{res}{res}EQ6 3.18 Child: Ever praised{p_end}
+{p 0 48}{bind:CH19           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH19     }{bind:  }{res}{res}EQ6 3.19 Child: Ever beaten{p_end}
+{p 0 48}{bind:CH20           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:CH20     }{bind:  }{res}{res}EQ6 3.20 Child: Ever scolded{p_end}
+{p 0 48}{bind:CH22           }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ6 3.22 Child: School code{p_end}
+{p 0 48}{bind:SM3            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ12 8.3 Short Term Morbidity Days ill last 30 days{p_end}
+{p 0 48}{bind:SM4            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM4      }{bind:  }{res}{res}EQ12 8.4 Short Term Morbidity Fever last 30 days{p_end}
+{p 0 48}{bind:SM5            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM5      }{bind:  }{res}{res}EQ12 8.5 Short Term Morbidity Cough last 30 days{p_end}
+{p 0 48}{bind:SM6            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM6      }{bind:  }{res}{res}EQ12 8.6 Short Term Morbidity Cough with short breaths{p_end}
+{p 0 48}{bind:SM7            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM7      }{bind:  }{res}{res}EQ12 8.7 Diarrhea{p_end}
+{p 0 48}{bind:SM8            }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM8      }{bind:  }{res}{res}EQ12 8.8 Diarrhea with blood{p_end}
+{p 0 48}{bind:SM9            }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:SM9      }{bind:  }{res}{res}EQ12 8.9 Liquid intake if Diarrhea{p_end}
+{p 0 48}{bind:SM10           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM10     }{bind:  }{res}{res}EQ12 8.10 ORS given if Diarrhea{p_end}
+{p 0 48}{bind:SM11           }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ12 8.11 Short Term Morbidity How many days disabled in last 30 days{p_end}
+{p 0 48}{bind:SM12           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM12     }{bind:  }{res}{res}EQ12 8.12 Short Term Morbidity Received advice or treatment in last month{p_end}
+{p 0 48}{bind:SM14A          }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:SM14A    }{bind:  }{res}{res}EQ13 8.14a Short Term Morbidity Who gave advice or treatment 1st{p_end}
+{p 0 48}{bind:SM14B          }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:SM14B    }{bind:  }{res}{res}EQ13 8.14b Short Term Morbidity Where received advice or treatment 1st{p_end}
+{p 0 48}{bind:SM15A          }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:SM15A    }{bind:  }{res}{res}EQ13 8.15a Short Term Morbidity Who gave advice or treatment 2nd{p_end}
+{p 0 48}{bind:SM15B          }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:SM15B    }{bind:  }{res}{res}EQ13 8.15b Short Term Morbidity Where received advice or treatment 2nd{p_end}
+{p 0 48}{bind:SM16           }{txt}{bind: int     }{bind:{txt}%25.0f    }{space 1}{bind:SM16     }{bind:  }{res}{res}EQ13 8.16 Short Term Morbidity Treatment type{p_end}
+{p 0 48}{bind:SM17           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ13 8.17 Short Term Morbidity Days hospitalized{p_end}
+{p 0 48}{bind:SM18           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ13 8.18 Short Term Morbidity Total cost for inpatient/outpatient (doctor, hosp{p_end}
+{p 0 48}{bind:SM19           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:SM19     }{bind:  }{res}{res}EQ13 8.19 Short Term Morbidity Tests and medicines included in fees{p_end}
+{p 0 48}{bind:SM20           }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ13 8.20 Short Term Morbidity Cost for medicines/tests/expenses not included in{p_end}
+{p 0 48}{bind:SM21           }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ13 8.21 Short Term Morbidity Treatment travel expenses Rs{p_end}
+{p 0 48}{bind:SM22           }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ13 8.22 Short Term Morbidity Expenditures covered by medical Insurance Rs{p_end}
+{p 0 48}{bind:MB3            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB3      }{bind:  }{res}{res}EQ14 9.3 Major Morbidity Cataract{p_end}
+{p 0 48}{bind:MB4            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB4      }{bind:  }{res}{res}EQ14 9.4 Major Morbidity Tuberculosis (TB){p_end}
+{p 0 48}{bind:MB5            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB5      }{bind:  }{res}{res}EQ14 9.5 Major Morbidity High Blood Pressure{p_end}
+{p 0 48}{bind:MB6            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB6      }{bind:  }{res}{res}EQ14 9.6 Major Morbidity Heart disease{p_end}
+{p 0 48}{bind:MB7            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB7      }{bind:  }{res}{res}EQ14 9.7 Major Morbidity Diabetes{p_end}
+{p 0 48}{bind:MB8            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB8      }{bind:  }{res}{res}EQ14 9.8 Major Morbidity Leprosy{p_end}
+{p 0 48}{bind:MB9            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB9      }{bind:  }{res}{res}EQ14 9.9 Major Morbidity Cancer{p_end}
+{p 0 48}{bind:MB10           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB10     }{bind:  }{res}{res}EQ14 9.10 Major Morbidity Asthma{p_end}
+{p 0 48}{bind:MB11           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB11     }{bind:  }{res}{res}EQ14 9.11 Major Morbidity Polio{p_end}
+{p 0 48}{bind:MB12           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB12     }{bind:  }{res}{res}EQ14 9.12 Major Morbidity Paralysis{p_end}
+{p 0 48}{bind:MB13           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB13     }{bind:  }{res}{res}EQ14 9.13 Major Morbidity Epilepsy{p_end}
+{p 0 48}{bind:MB14           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB14     }{bind:  }{res}{res}EQ14 9.14 Major Morbidity Mental illness{p_end}
+{p 0 48}{bind:MB15           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB15     }{bind:  }{res}{res}EQ14 9.15 Major Morbidity STD or AIDS{p_end}
+{p 0 48}{bind:MB16           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB16     }{bind:  }{res}{res}EQ14 9.16 Major Morbidity Accident{p_end}
+{p 0 48}{bind:MB17           }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MB17     }{bind:  }{res}{res}EQ14 9.17 Major Morbidity Other long term{p_end}
+{p 0 48}{bind:MB18           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ14 9.18 Major Morbidity How many days disabled in last 12 months{p_end}
+{p 0 48}{bind:MB19           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MB19     }{bind:  }{res}{res}EQ14 9.19 Major Morbidity Received advice or treatment in last 12 months{p_end}
+{p 0 48}{bind:MB21A          }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:MB21A    }{bind:  }{res}{res}EQ15 9.21 Major Morbidity Who gave advice or treatment 1st{p_end}
+{p 0 48}{bind:MB21B          }{txt}{bind: int     }{bind:{txt}%29.0f    }{space 1}{bind:MB21B    }{bind:  }{res}{res}EQ15 9.21 Major Morbidity Where received advice or treatment 1st{p_end}
+{p 0 48}{bind:MB22A          }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:MB22A    }{bind:  }{res}{res}EQ15 9.22 Major Morbidity Who gave advice or treatment 2nd{p_end}
+{p 0 48}{bind:MB22B          }{txt}{bind: int     }{bind:{txt}%29.0f    }{space 1}{bind:MB22B    }{bind:  }{res}{res}EQ15 9.22 Major Morbidity Where received advice or treatment 2nd{p_end}
+{p 0 48}{bind:MB23           }{txt}{bind: int     }{bind:{txt}%25.0f    }{space 1}{bind:MB23     }{bind:  }{res}{res}EQ15 9.23 Major Morbidity Treatment type{p_end}
+{p 0 48}{bind:MB24           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ15 9.24 Major Morbidity Days hospitalized{p_end}
+{p 0 48}{bind:MB25           }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ15 9.25 Major morbidity Cost Dr/hosp (in rupees){p_end}
+{p 0 48}{bind:MB26           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MB26     }{bind:  }{res}{res}EQ15 9.26 Major Morbidity Tests and medicines included in fees{p_end}
+{p 0 48}{bind:MB27           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ15 9.27 Major morbidity Cost Medicine (in rupees){p_end}
+{p 0 48}{bind:MB28           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ15 9.28 Major morbidity Cost Travel (in rupees){p_end}
+{p 0 48}{bind:MB29           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ15 9.29 Major Morbidity Expenditures covered by medical Insurance Rs{p_end}
+{p 0 48}{bind:AD3            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD3      }{bind:  }{res}{res}EQ16 10.3 Difficulty Walking 1km{p_end}
+{p 0 48}{bind:AD4            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD4      }{bind:  }{res}{res}EQ16 10.4 Difficulty Toilet{p_end}
+{p 0 48}{bind:AD5            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD5      }{bind:  }{res}{res}EQ16 10.5 Difficulty Dressing{p_end}
+{p 0 48}{bind:AD6            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD6      }{bind:  }{res}{res}EQ16 10.6 Difficulty Hearing{p_end}
+{p 0 48}{bind:AD7            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD7      }{bind:  }{res}{res}EQ16 10.7 Difficulty Speaking{p_end}
+{p 0 48}{bind:AD8            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD8      }{bind:  }{res}{res}EQ16 10.8 Difficulty Far sight{p_end}
+{p 0 48}{bind:AD9            }{txt}{bind: int     }{bind:{txt}%17.0f    }{space 1}{bind:AD9      }{bind:  }{res}{res}EQ16 10.9 Difficulty Short sight{p_end}
+{p 0 48}{bind:TO3            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TO3      }{bind:  }{res}{res}EQ17 12.3 Smoke cigarettes{p_end}
+{p 0 48}{bind:TO4            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TO4      }{bind:  }{res}{res}EQ17 12.4 Smoke bidis or hukkah{p_end}
+{p 0 48}{bind:TO5            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TO5      }{bind:  }{res}{res}EQ17 12.5 Chew tobacco / gutkha{p_end}
+{p 0 48}{bind:TO6            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:TO6      }{bind:  }{res}{res}EQ17 12.6 Drink alcohol{p_end}
+{p 0 48}{bind:AP2            }{txt}{bind: int     }{bind:{txt}%18.0f    }{space 1}{bind:AP2      }{bind:  }{res}{res}EQ36 25.2 Eligible woman questionnaire{p_end}
+{p 0 48}{bind:AP3            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}EQ36 25.3 Anthropometry Birth ID{p_end}
+{p 0 48}{bind:AP5            }{txt}{bind: double  }{bind:{txt}%15.11f   }{space 1}{bind:         }{bind:  }{res}{res}EQ36 25.5 Anthropometry Height 1st{p_end}
+{p 0 48}{bind:AP6            }{txt}{bind: double  }{bind:{txt}%15.11f   }{space 1}{bind:         }{bind:  }{res}{res}EQ36 25.6 Anthropometry Height 2nd{p_end}
+{p 0 48}{bind:AP7            }{txt}{bind: int     }{bind:{txt}%10.0f    }{space 1}{bind:AP7      }{bind:  }{res}{res}EQ36 25.7 Anthropometry Position{p_end}
+{p 0 48}{bind:AP8            }{txt}{bind: double  }{bind:{txt}%15.11f   }{space 1}{bind:         }{bind:  }{res}{res}EQ36 25.8 Anthropometry Weight 1st{p_end}
+{p 0 48}{bind:AP9            }{txt}{bind: double  }{bind:{txt}%15.11f   }{space 1}{bind:         }{bind:  }{res}{res}EQ36 25.9 Anthropometry Weight 2nd{p_end}
+{p 0 48}{bind:EW3Y           }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:EW3Y     }{bind:  }{res}{res}EQ19 14.3 Respondent is Eligible Woman{p_end}
+{p 0 48}{bind:URBAN2011      }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{txt}URBAN2011{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}Urban residence from census 2011{p_end}
+{p 0 48}{bind:URBAN4_2011    }{txt}{bind: int     }{bind:{txt}%15.0f    }{space 1}{txt}URBAN4_2011{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}4-cat urban/rural from 2011 census & IHDS-II vill q{p_end}
+{p 0 48}{bind:METRO          }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:METRO    }{bind:  }{res}{res}Largest 6 metro areas 0/1{p_end}
+{p 0 48}{bind:METRO6         }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:METRO6   }{bind:  }{res}{res}Largest 6 metro areas 1-6{p_end}
+{p 0 48}{bind:POVLINE2005    }{txt}{bind: double  }{bind:{txt}%15.11f   }{space 1}{bind:         }{bind:  }{res}{res}Poverty cutoff specific for state/urban sector Tendulkar 2004-05 line{p_end}
+{p 0 48}{bind:POVLINE2012    }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}Poverty cut off Tendulkar Method, adjusted for interview date{p_end}
+{p 0 48}{bind:DEFLATOR       }{txt}{bind: double  }{bind:{txt}%15.13f   }{space 1}{bind:         }{bind:  }{res}{res}Deflator for converting 2012 prices, CPI based, month adj.{p_end}
+{p 0 48}{bind:NPERSONS       }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.0 N in household{p_end}
+{p 0 48}{bind:EWELIGIBLE     }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{txt}EWELIGIBLE{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}HH4 2.3,5,6 Woman 15-49 ever married{p_end}
+{p 0 48}{bind:EWQELIGIBLE    }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{txt}EWQELIGIBLE{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}HH4 2.3,5,6 EW q and 15-49 ever married{p_end}
+{p 0 48}{bind:ID11           }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:ID11     }{bind:  }{res}{res}HQ3 1.11 Religion{p_end}
+{p 0 48}{bind:ID13           }{txt}{bind: int     }{bind:{txt}%34.0f    }{space 1}{bind:ID13     }{bind:  }{res}{res}HQ3 1.13 Caste category{p_end}
+{p 0 48}{bind:GROUPS         }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:GROUPS   }{bind:  }{res}{res}HQ3 1.13-15 Caste & religion{p_end}
+{p 0 48}{bind:NF5            }{txt}{bind: long    }{bind:{txt}%8.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14 8.5 Business 1: Net income (rupees){p_end}
+{p 0 48}{bind:NF25           }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ15 8.25 Business 2: Net income (rupees){p_end}
+{p 0 48}{bind:NF45           }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ16 8.45 Business 3: Net income (rupees){p_end}
+{p 0 48}{bind:COTOTAL        }{txt}{bind: double  }{bind:{txt}%15.7f    }{space 1}{bind:         }{bind:  }{res}{res}HQ23 14. Total household consumption expenditure{p_end}
+{p 0 48}{bind:COPC           }{txt}{bind: double  }{bind:{txt}%15.7f    }{space 1}{bind:         }{bind:  }{res}{res}HQ23 14. household expenditure /capita{p_end}
+{p 0 48}{bind:ASSETS         }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}Total household assets (0-33){p_end}
+{p 0 48}{bind:ASSETS2005     }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}Total household assets, same as IHDS 2005{p_end}
+{p 0 48}{bind:INCCROP        }{txt}{bind: double  }{bind:{txt}%11.2f    }{space 1}{bind:         }{bind:  }{res}{res}HQ7-10 Income from crops minus expenses{p_end}
+{p 0 48}{bind:INCAGPROP      }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ7 5.14,41 Rs land, other rented out{p_end}
+{p 0 48}{bind:INCANIMAL      }{txt}{bind: double  }{bind:{txt}%15.7f    }{space 1}{bind:         }{bind:  }{res}{res}HQ11,23 mkt + home - cost{p_end}
+{p 0 48}{bind:INCAG          }{txt}{bind: double  }{bind:{txt}%15.6f    }{space 1}{bind:         }{bind:  }{res}{res}HQ7-10 Income from agriculture minus expenses{p_end}
+{p 0 48}{bind:INCBUS         }{txt}{bind: long    }{bind:{txt}%8.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14-16 8.5,25,45 All businesses: Net income{p_end}
+{p 0 48}{bind:INCOTHER       }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.1-3 Income from property, pensions (rupees){p_end}
+{p 0 48}{bind:INCEARN        }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.10-12 annual household wage and salary earnings with bonuses{p_end}
+{p 0 48}{bind:INCBENEFITS    }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ17 9.5+13,1-8 all Government benefits Rs{p_end}
+{p 0 48}{bind:INCREMIT       }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ5 3.13a Rs received by household from non-resident last year{p_end}
+{p 0 48}{bind:INCOME         }{txt}{bind: double  }{bind:{txt}%15.6f    }{space 1}{bind:         }{bind:  }{res}{res}HQ Total income{p_end}
+{p 0 48}{bind:INCOMEPC       }{txt}{bind: double  }{bind:{txt}%15.7f    }{space 1}{bind:         }{bind:  }{res}{res}HQ per capita income{p_end}
+{p 0 48}{bind:WKANIMAL       }{txt}{bind: int     }{bind:{txt}%15.0f    }{space 1}{bind:WKANIMAL }{bind:  }{res}{res}HQ11 an5+ work participation animals{p_end}
+{p 0 48}{bind:WKBUSINESS     }{txt}{bind: int     }{bind:{txt}%15.0f    }{space 1}{txt}WKBUSINESS{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}HQ14-16 nf12+ work participation business{p_end}
+{p 0 48}{bind:WS3NM          }{txt}{bind: str40   }{bind:{txt}%40s      }{space 1}{bind:         }{bind:  }{res}{res}HQ12 7.3 Job description -job1{p_end}
+{p 0 48}{bind:WS4            }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:WS4      }{bind:  }{res}{res}HQ12 7.4 Occupation -job1{p_end}
+{p 0 48}{bind:WS5            }{txt}{bind: int     }{bind:{txt}%23.0f    }{space 1}{bind:WS5      }{bind:  }{res}{res}HQ12 7.5 Industry -job1{p_end}
+{p 0 48}{bind:WS7            }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.7 Working days -person total{p_end}
+{p 0 48}{bind:WS7MONTHS      }{txt}{bind: double  }{bind:{txt}%15.12f   }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.7 Work months last year{p_end}
+{p 0 48}{bind:WS8            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8 Work hours/day -job1{p_end}
+{p 0 48}{bind:WS8YEAR        }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5&6.6 Work hours/year -person total{p_end}
+{p 0 48}{bind:WS9            }{txt}{bind: int     }{bind:{txt}%11.0f    }{space 1}{bind:WS9      }{bind:  }{res}{res}HQ13 7.9 Pay period -job1{p_end}
+{p 0 48}{bind:WS10           }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.10 Pay rate -job1 (rupees){p_end}
+{p 0 48}{bind:WS10ANNUAL     }{txt}{bind: double  }{bind:{txt}%15.7f    }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8 annual cash wages{p_end}
+{p 0 48}{bind:WSEARN         }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.10 annual earnings -person total{p_end}
+{p 0 48}{bind:WSEARNHOURLY   }{txt}{bind: double  }{bind:{txt}%15.10f   }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.10 hourly wage & bonuses, max=10000{p_end}
+{p 0 48}{bind:WS11           }{txt}{bind: int     }{bind:{txt}%9.0f     }{space 1}{bind:WS11     }{bind:  }{res}{res}HQ13 7.11 Meals/housing -person total{p_end}
+{p 0 48}{bind:WS11MEALS      }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{txt}WS11MEALS{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}HQ13 7.11 Meals benefit -any job{p_end}
+{p 0 48}{bind:WS11HOUSE      }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{txt}WS11HOUSE{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}HQ13 7.11 Housing benefit -any job{p_end}
+{p 0 48}{bind:WS11MEALSRS    }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.11 Meals benefit Rs person total{p_end}
+{p 0 48}{bind:WS11HOUSERS    }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.11 Housing benefit Rs person total{p_end}
+{p 0 48}{bind:WS12           }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.12 Bonus -person total{p_end}
+{p 0 48}{bind:WS13           }{txt}{bind: int     }{bind:{txt}%33.0f    }{space 1}{bind:WS13     }{bind:  }{res}{res}HQ13 7.13 Casual -job1{p_end}
+{p 0 48}{bind:WS14           }{txt}{bind: int     }{bind:{txt}%20.0f    }{space 1}{bind:WS14     }{bind:  }{res}{res}HQ13 7.14 Government, NREGA, private{p_end}
+{p 0 48}{bind:WS15           }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.15 Minutes to workplace{p_end}
+{p 0 48}{bind:WS7AGLAB       }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5 agricultural labour: days/year{p_end}
+{p 0 48}{bind:WS8AGLAB       }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5, agricultural labour: hours/year{p_end}
+{p 0 48}{bind:WSEARNAGLAB    }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8+ agricultural labour: annual earnings{p_end}
+{p 0 48}{bind:WKAGLAB        }{txt}{bind: int     }{bind:{txt}%57.0f    }{space 1}{bind:WKAGLAB  }{bind:  }{res}{res}HQ13 7.3 Farm wage labour (5cat){p_end}
+{p 0 48}{bind:WS7NONAG       }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5 non-agricultural labour: days/year{p_end}
+{p 0 48}{bind:WS8NONAG       }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5, non-agricultural labour: hours/year{p_end}
+{p 0 48}{bind:WSEARNNONAG    }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8+ non-agricultural labour: annual wages{p_end}
+{p 0 48}{bind:WKNONAG        }{txt}{bind: int     }{bind:{txt}%57.0f    }{space 1}{bind:WKNONAG  }{bind:  }{res}{res}HQ13 7.3 non-agricultural wage labour (5cat){p_end}
+{p 0 48}{bind:WS7SALARY      }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5 salary position: days/year{p_end}
+{p 0 48}{bind:WS8SALARY      }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5, salary position: hours/year{p_end}
+{p 0 48}{bind:WSEARNSALARY   }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8+ salary position: annual wages{p_end}
+{p 0 48}{bind:WKSALARY       }{txt}{bind: int     }{bind:{txt}%57.0f    }{space 1}{bind:WKSALARY }{bind:  }{res}{res}HQ13 7.3 Salary position (5cat){p_end}
+{p 0 48}{bind:WS7NREGA       }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5 NREGA position: days/year{p_end}
+{p 0 48}{bind:WS8NREGA       }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.5, NREGA position: hours/year{p_end}
+{p 0 48}{bind:WSEARNNREGA    }{txt}{bind: long    }{bind:{txt}%5.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.8+ NREGA position: annual wages{p_end}
+{p 0 48}{bind:WKNREGA        }{txt}{bind: int     }{bind:{txt}%57.0f    }{space 1}{bind:WKNREGA  }{bind:  }{res}{res}HQ13 7.3 NREGA work (5cat){p_end}
+{p 0 48}{bind:WKDAYS         }{txt}{bind: int     }{bind:{txt}%3.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ work days /year (farm, business, wage|salary){p_end}
+{p 0 48}{bind:WKHOURS        }{txt}{bind: int     }{bind:{txt}%4.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ work hours /year (farm, business, wage|salary){p_end}
+{p 0 48}{bind:WKANY5         }{txt}{bind: int     }{bind:{txt}%15.0f    }{space 1}{bind:WKANY5   }{bind:  }{res}{res}HQ work participation (farm, business, wage|salary){p_end}
+{p 0 48}{bind:RSUNEARN       }{txt}{bind: double  }{bind:{txt}%15.6f    }{space 1}{bind:         }{bind:  }{res}{res}ind: other Household income{p_end}
+{p 0 48}{bind:MHEADAGE       }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 ro5 Age of male head{p_end}
+{p 0 48}{bind:FHEADAGE       }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 ro5 Age of female head{p_end}
+{p 0 48}{bind:NADULTM        }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 21+ men in Household{p_end}
+{p 0 48}{bind:NADULTF        }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 N 21+ women in Household{p_end}
+{p 0 48}{bind:NCHILDM        }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 0-14 boys in Household{p_end}
+{p 0 48}{bind:NCHILDF        }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 0-14 girls in Household{p_end}
+{p 0 48}{bind:NTEENM         }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 15-20 boys in Household{p_end}
+{p 0 48}{bind:NTEENF         }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 15-20 girls in Household{p_end}
+{p 0 48}{bind:NELDERM        }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 60+ men in Household{p_end}
+{p 0 48}{bind:NELDERF        }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.5 # 60+ women in household{p_end}
+{p 0 48}{bind:NMARRIEDM      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.6 N married men in Household{p_end}
+{p 0 48}{bind:NMARRIEDF      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ4 2.6 N married women in Household{p_end}
+{p 0 48}{bind:NWKNONAG       }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers (>=240hrs): non-agricultural wage{p_end}
+{p 0 48}{bind:NWKAGLAB       }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers (>=240hrs): farm wage{p_end}
+{p 0 48}{bind:NWKSALARY      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers (>=240hrs): salary position{p_end}
+{p 0 48}{bind:NWKBUSINESS    }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ14-16 nf12,13 Number of workers (>=240hrs): business{p_end}
+{p 0 48}{bind:NWKFARM        }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ10 fm37,38 Number of workers (>=240hrs): farm{p_end}
+{p 0 48}{bind:NWKANIMAL      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ11 an5 Number of workers (often): animal{p_end}
+{p 0 48}{bind:NWKNREGA       }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers (>=240hrs): NREGA{p_end}
+{p 0 48}{bind:NWKNREGA4      }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers, any hours: NREGA{p_end}
+{p 0 48}{bind:NWKNONNREGA    }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 Number of workers (>=240hrs): non-agricultural wage not NREGA{p_end}
+{p 0 48}{bind:NWKANY5        }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ10-16 Number of workers (>=240hrs): any job{p_end}
+{p 0 48}{bind:INCNONAG       }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 income: non-agricultural wage{p_end}
+{p 0 48}{bind:INCAGLAB       }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 income: farm wage{p_end}
+{p 0 48}{bind:INCSALARY      }{txt}{bind: long    }{bind:{txt}%7.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 income: salary position{p_end}
+{p 0 48}{bind:INCNREGA       }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 income: NREGA{p_end}
+{p 0 48}{bind:INCNONNREGA    }{txt}{bind: long    }{bind:{txt}%6.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ13 7.3 income: non-agricultural wage not NREGA{p_end}
+{p 0 48}{bind:NNR            }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ5 3.0 # Household nonresidents{p_end}
+{p 0 48}{bind:HHEDUC         }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:HHEDUC   }{bind:  }{res}{res}HQ19 11.6 Highest adult Education{p_end}
+{p 0 48}{bind:HHEDUCM        }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:HHEDUCM  }{bind:  }{res}{res}HQ19 11.6 Highest male adult education{p_end}
+{p 0 48}{bind:HHEDUCF        }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:HHEDUCF  }{bind:  }{res}{res}HQ19 11.6 Highest female adult education{p_end}
+{p 0 48}{bind:MG4            }{txt}{bind: int     }{bind:{txt}%15.0f    }{space 1}{bind:MG4      }{bind:  }{res}{res}HQ6 4.4 Place of migration{p_end}
+{p 0 48}{bind:MG5            }{txt}{bind: int     }{bind:{txt}%7.0f     }{space 1}{bind:MG5      }{bind:  }{res}{res}HQ6 4.5 Rural/ Urban{p_end}
+{p 0 48}{bind:MG6            }{txt}{bind: int     }{bind:{txt}%24.0f    }{space 1}{bind:MG6      }{bind:  }{res}{res}HQ6 4.6 Gone alone or with family?{p_end}
+{p 0 48}{bind:MG7            }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.7 Gone for how many months?{p_end}
+{p 0 48}{bind:MG8            }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.8 How many years ago?{p_end}
+{p 0 48}{bind:MG9NM          }{txt}{bind: str40   }{bind:{txt}%40s      }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.9 Type of work{p_end}
+{p 0 48}{bind:MG10           }{txt}{bind: int     }{bind:{txt}%22.0f    }{space 1}{bind:MG10     }{bind:  }{res}{res}HQ6 4.10 Occupation code{p_end}
+{p 0 48}{bind:MG11           }{txt}{bind: int     }{bind:{txt}%29.0f    }{space 1}{bind:MG11     }{bind:  }{res}{res}HQ6 4.11 Name migrated through{p_end}
+{p 0 48}{bind:MGYEAR5        }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MGYEAR5  }{bind:  }{res}{res}HQ6 4.1 Migrant five years ago or less{p_end}
+{p 0 48}{bind:NMIG5          }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.1 # migrations in last 5 years{p_end}
+{p 0 48}{bind:MGMONTHS5      }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.7 total months gone in last 5 years{p_end}
+{p 0 48}{bind:MGYEAR1        }{txt}{bind: int     }{bind:{txt}%5.0f     }{space 1}{bind:MGYEAR1  }{bind:  }{res}{res}HQ6 4.8 Migrant one year ago or less{p_end}
+{p 0 48}{bind:NMIG1          }{txt}{bind: int     }{bind:{txt}%1.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.1 # migrations in last 1 year{p_end}
+{p 0 48}{bind:MGMONTHS1      }{txt}{bind: int     }{bind:{txt}%2.0f     }{space 1}{bind:         }{bind:  }{res}{res}HQ6 4.7 total months gone in last 1 year{p_end}
+{p 0 48}{bind:female_occupa~n}{txt}{bind: float   }{bind:{txt}%11.0g    }{space 1}{txt}partoflabour{p_end}
+{p 0 48}{space 44}{bind:  }{res}{res}female_occu_status{p_end}
+{txt}{hline}
+Sorted by: 
+{res}     Note: Dataset has changed since last saved.
+
+{com}. reg ED12
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     7,250
+{txt}{hline 13}{c +}{hline 34}   F(0, 7249)      = {res}     0.00
+{txt}       Model {c |} {res}          0         0           .   {txt}Prob > F        ={res}         .
+{txt}    Residual {c |} {res} 22513.1367     7,249   3.1056886   {txt}R-squared       ={res}    0.0000
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0000
+{txt}       Total {c |} {res} 22513.1367     7,249   3.1056886   {txt}Root MSE        =   {res} 1.7623
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        ED12{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 2.414207{col 26}{space 2} .0206971{col 37}{space 1}  116.64{col 46}{space 3}0.000{col 54}{space 4} 2.373635{col 67}{space 3} 2.454779
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. keep age RO5<=22
+{err}variable {bf}age{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. keep Age RO5<=22
+{err}variable {bf}Age{sf} not found
+{txt}{search r(111), local:r(111);}
+
+{com}. keep RO5<=22
+{err}<= invalid name
+{txt}{search r(198), local:r(198);}
+
+{com}. keep if RO5>=22
+{txt}(41,323 observations deleted)
+
+{com}. reg HHEDUCF
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}    61,167
+{txt}{hline 13}{c +}{hline 34}   F(0, 61166)     = {res}     0.00
+{txt}       Model {c |} {res}          0         0           .   {txt}Prob > F        ={res}         .
+{txt}    Residual {c |} {res} 1797822.55    61,166  29.3925146   {txt}R-squared       ={res}    0.0000
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0000
+{txt}       Total {c |} {res} 1797822.55    61,166  29.3925146   {txt}Root MSE        =   {res} 5.4215
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}     HHEDUCF{col 14}{c |} Coefficient{col 26}  Std. err.{col 38}      t{col 46}   P>|t|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.570406{col 26}{space 2}  .021921{col 37}{space 1}  299.73{col 46}{space 3}0.000{col 54}{space 4}  6.52744{col 67}{space 3} 6.613371
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. logit female_occupation INCOME ED12 HHEDUCF i.GROUP
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-3485.1077}  
+Iteration 1:{space 3}log likelihood = {res:-3368.9321}  
+Iteration 2:{space 3}log likelihood = {res:-3368.6409}  
+Iteration 3:{space 3}log likelihood = {res:-3368.6408}  
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:5,057}
+{txt}{col 57}{lalign 13:LR chi2({res:9})}{col 70} = {res}{ralign 6:232.93}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-3368.6408}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0334}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}INCOME {c |}{col 25}{res}{space 2} 2.25e-07{col 37}{space 2} 6.92e-08{col 48}{space 1}    3.25{col 57}{space 3}0.001{col 65}{space 4} 8.90e-08{col 78}{space 3} 3.60e-07
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .1298107{col 37}{space 2} .0176395{col 48}{space 1}    7.36{col 57}{space 3}0.000{col 65}{space 4}  .095238{col 78}{space 3} .1643834
+{txt}{space 16}HHEDUCF {c |}{col 25}{res}{space 2} .0619903{col 37}{space 2} .0267424{col 48}{space 1}    2.32{col 57}{space 3}0.020{col 65}{space 4} .0095763{col 78}{space 3} .1144043
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .0055197{col 37}{space 2} .0959235{col 48}{space 1}    0.06{col 57}{space 3}0.954{col 65}{space 4}-.1824868{col 78}{space 3} .1935262
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2} .1395939{col 37}{space 2} .0984281{col 48}{space 1}    1.42{col 57}{space 3}0.156{col 65}{space 4}-.0533216{col 78}{space 3} .3325094
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} .6757022{col 37}{space 2} .1188235{col 48}{space 1}    5.69{col 57}{space 3}0.000{col 65}{space 4} .4428124{col 78}{space 3}  .908592
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} 1.491923{col 37}{space 2} .1648273{col 48}{space 1}    9.05{col 57}{space 3}0.000{col 65}{space 4} 1.168867{col 78}{space 3} 1.814978
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2} .2856544{col 37}{space 2} .1345857{col 48}{space 1}    2.12{col 57}{space 3}0.034{col 65}{space 4} .0218713{col 78}{space 3} .5494375
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2}  .312209{col 37}{space 2} .1319197{col 48}{space 1}    2.37{col 57}{space 3}0.018{col 65}{space 4} .0536512{col 78}{space 3} .5707668
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2}-1.771667{col 37}{space 2} .3965575{col 48}{space 1}   -4.47{col 57}{space 3}0.000{col 65}{space 4}-2.548906{col 78}{space 3} -.994429
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. logit female_occupation INCOME ED12 HHEDUCF MG5 STATEID i.GROUP
+
+{txt}note: {bf:1.GROUPS} != 0 predicts failure perfectly;
+      {bf:1.GROUPS} omitted and 1 obs not used.
+
+note: outcome = {bf:ED12} < 7 predicts data perfectly except for
+      {bf:ED12} == 7 subsample:
+      {bf:ED12} omitted and 5 obs not used.
+
+outcome = {bf:INCOME} <= 344400 predicts data perfectly
+{search r(2000), local:r(2000);}
+
+{com}. logit female_occupation INCOME ED12 HHEDUCF STATEID i.GROUP
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-3485.1077}  
+Iteration 1:{space 3}log likelihood = {res:-3368.8675}  
+Iteration 2:{space 3}log likelihood = {res:-3368.5769}  
+Iteration 3:{space 3}log likelihood = {res:-3368.5769}  
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:5,057}
+{txt}{col 57}{lalign 13:LR chi2({res:10})}{col 70} = {res}{ralign 6:233.06}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-3368.5769}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0334}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}INCOME {c |}{col 25}{res}{space 2} 2.22e-07{col 37}{space 2} 6.96e-08{col 48}{space 1}    3.19{col 57}{space 3}0.001{col 65}{space 4} 8.55e-08{col 78}{space 3} 3.58e-07
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .1300835{col 37}{space 2} .0176545{col 48}{space 1}    7.37{col 57}{space 3}0.000{col 65}{space 4} .0954813{col 78}{space 3} .1646857
+{txt}{space 16}HHEDUCF {c |}{col 25}{res}{space 2} .0611205{col 37}{space 2} .0268508{col 48}{space 1}    2.28{col 57}{space 3}0.023{col 65}{space 4} .0084939{col 78}{space 3} .1137471
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2}-.0010153{col 37}{space 2} .0028381{col 48}{space 1}   -0.36{col 57}{space 3}0.721{col 65}{space 4}-.0065779{col 78}{space 3} .0045473
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .0068385{col 37}{space 2}  .095999{col 48}{space 1}    0.07{col 57}{space 3}0.943{col 65}{space 4}-.1813161{col 78}{space 3} .1949932
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2}  .146203{col 37}{space 2} .1001505{col 48}{space 1}    1.46{col 57}{space 3}0.144{col 65}{space 4}-.0500884{col 78}{space 3} .3424944
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} .6779068{col 37}{space 2} .1189862{col 48}{space 1}    5.70{col 57}{space 3}0.000{col 65}{space 4} .4446982{col 78}{space 3} .9111154
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} 1.493979{col 37}{space 2} .1649355{col 48}{space 1}    9.06{col 57}{space 3}0.000{col 65}{space 4} 1.170712{col 78}{space 3} 1.817247
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2} .2866841{col 37}{space 2} .1346223{col 48}{space 1}    2.13{col 57}{space 3}0.033{col 65}{space 4} .0228292{col 78}{space 3}  .550539
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} .3189158{col 37}{space 2} .1332525{col 48}{space 1}    2.39{col 57}{space 3}0.017{col 65}{space 4} .0577457{col 78}{space 3} .5800859
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2} -1.74355{col 37}{space 2} .4042364{col 48}{space 1}   -4.31{col 57}{space 3}0.000{col 65}{space 4}-2.535838{col 78}{space 3}-.9512609
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. logit female_occupation INCOME ED12 ID11 HHEDUCF STATEID i.GROUP
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-3485.1077}  
+Iteration 1:{space 3}log likelihood = {res:-3366.3448}  
+Iteration 2:{space 3}log likelihood = {res:-3365.9547}  
+Iteration 3:{space 3}log likelihood = {res:-3365.9545}  
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:5,057}
+{txt}{col 57}{lalign 13:LR chi2({res:11})}{col 70} = {res}{ralign 6:238.31}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-3365.9545}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0342}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}INCOME {c |}{col 25}{res}{space 2} 2.20e-07{col 37}{space 2} 6.94e-08{col 48}{space 1}    3.17{col 57}{space 3}0.002{col 65}{space 4} 8.38e-08{col 78}{space 3} 3.56e-07
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .1298598{col 37}{space 2} .0176627{col 48}{space 1}    7.35{col 57}{space 3}0.000{col 65}{space 4} .0952415{col 78}{space 3} .1644781
+{txt}{space 19}ID11 {c |}{col 25}{res}{space 2} .1122244{col 37}{space 2} .0497671{col 48}{space 1}    2.25{col 57}{space 3}0.024{col 65}{space 4} .0146828{col 78}{space 3} .2097661
+{txt}{space 16}HHEDUCF {c |}{col 25}{res}{space 2} .0602387{col 37}{space 2}  .026853{col 48}{space 1}    2.24{col 57}{space 3}0.025{col 65}{space 4} .0076079{col 78}{space 3} .1128695
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2}-.0001244{col 37}{space 2} .0028655{col 48}{space 1}   -0.04{col 57}{space 3}0.965{col 65}{space 4}-.0057407{col 78}{space 3} .0054919
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .0036371{col 37}{space 2}  .095999{col 48}{space 1}    0.04{col 57}{space 3}0.970{col 65}{space 4}-.1845176{col 78}{space 3} .1917917
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2} .1319629{col 37}{space 2} .1003477{col 48}{space 1}    1.32{col 57}{space 3}0.188{col 65}{space 4} -.064715{col 78}{space 3} .3286407
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} .6433287{col 37}{space 2} .1199611{col 48}{space 1}    5.36{col 57}{space 3}0.000{col 65}{space 4} .4082092{col 78}{space 3} .8784481
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} 1.332693{col 37}{space 2} .1787194{col 48}{space 1}    7.46{col 57}{space 3}0.000{col 65}{space 4} .9824099{col 78}{space 3} 1.682977
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2} .1728941{col 37}{space 2} .1437335{col 48}{space 1}    1.20{col 57}{space 3}0.229{col 65}{space 4}-.1088183{col 78}{space 3} .4546065
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} .0211235{col 37}{space 2} .1876104{col 48}{space 1}    0.11{col 57}{space 3}0.910{col 65}{space 4}-.3465861{col 78}{space 3} .3888332
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2}-1.853867{col 37}{space 2} .4072731{col 48}{space 1}   -4.55{col 57}{space 3}0.000{col 65}{space 4}-2.652108{col 78}{space 3}-1.055626
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. logit HHEDUCM INCOME ED12 ID11 STATEID i.GROUP
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-322.54503}  
+Iteration 1:{space 3}log likelihood = {res:-294.11188}  
+Iteration 2:{space 3}log likelihood = {res:-273.80275}  
+Iteration 3:{space 3}log likelihood = {res:-269.66829}  
+Iteration 4:{space 3}log likelihood = {res:-269.64688}  
+Iteration 5:{space 3}log likelihood = {res:-269.64687}  
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:4,800}
+{txt}{col 57}{lalign 13:LR chi2({res:10})}{col 70} = {res}{ralign 6:105.80}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-269.64687}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.1640}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                HHEDUCM{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 17}INCOME {c |}{col 25}{res}{space 2} 5.94e-06{col 37}{space 2} 1.09e-06{col 48}{space 1}    5.47{col 57}{space 3}0.000{col 65}{space 4} 3.82e-06{col 78}{space 3} 8.07e-06
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .0945712{col 37}{space 2} .0865882{col 48}{space 1}    1.09{col 57}{space 3}0.275{col 65}{space 4}-.0751386{col 78}{space 3}  .264281
+{txt}{space 19}ID11 {c |}{col 25}{res}{space 2} .3942948{col 37}{space 2} .2572588{col 48}{space 1}    1.53{col 57}{space 3}0.125{col 65}{space 4}-.1099232{col 78}{space 3} .8985127
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2} .0316555{col 37}{space 2} .0136593{col 48}{space 1}    2.32{col 57}{space 3}0.020{col 65}{space 4} .0048838{col 78}{space 3} .0584272
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .3444614{col 37}{space 2} .7273095{col 48}{space 1}    0.47{col 57}{space 3}0.636{col 65}{space 4}-1.081039{col 78}{space 3} 1.769962
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2}-.6842368{col 37}{space 2} .6524793{col 48}{space 1}   -1.05{col 57}{space 3}0.294{col 65}{space 4}-1.963073{col 78}{space 3} .5945991
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2}-2.049487{col 37}{space 2} .6237314{col 48}{space 1}   -3.29{col 57}{space 3}0.001{col 65}{space 4}-3.271978{col 78}{space 3}-.8269958
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2}-2.463488{col 37}{space 2}  .714951{col 48}{space 1}   -3.45{col 57}{space 3}0.001{col 65}{space 4}-3.864766{col 78}{space 3}-1.062209
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2}-1.000391{col 37}{space 2} .8137821{col 48}{space 1}   -1.23{col 57}{space 3}0.219{col 65}{space 4}-2.595375{col 78}{space 3} .5945926
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} -2.02711{col 37}{space 2} 1.004928{col 48}{space 1}   -2.02{col 57}{space 3}0.044{col 65}{space 4}-3.996732{col 78}{space 3}-.0574869
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2} 2.925697{col 37}{space 2} .7114035{col 48}{space 1}    4.11{col 57}{space 3}0.000{col 65}{space 4} 1.531372{col 78}{space 3} 4.320022
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: 0 failures and 33 successes completely determined.{p_end}
+
+{com}. logit HHEDUCF INCOME ED12 ID11 STATEID i.GROUP
+
+{txt}outcome does not vary; remember:
+                                  0 = negative outcome,
+        all other nonmissing values = positive outcome
+{search r(2000), local:r(2000);}
+
+{com}. logit female_occupation HHEDUCF INCOME ED12 ID11 STATEID i.GROUP
+
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-3485.1077}  
+Iteration 1:{space 3}log likelihood = {res:-3366.3448}  
+Iteration 2:{space 3}log likelihood = {res:-3365.9547}  
+Iteration 3:{space 3}log likelihood = {res:-3365.9545}  
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:5,057}
+{txt}{col 57}{lalign 13:LR chi2({res:11})}{col 70} = {res}{ralign 6:238.31}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-3365.9545}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0342}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 16}HHEDUCF {c |}{col 25}{res}{space 2} .0602387{col 37}{space 2}  .026853{col 48}{space 1}    2.24{col 57}{space 3}0.025{col 65}{space 4} .0076079{col 78}{space 3} .1128695
+{txt}{space 17}INCOME {c |}{col 25}{res}{space 2} 2.20e-07{col 37}{space 2} 6.94e-08{col 48}{space 1}    3.17{col 57}{space 3}0.002{col 65}{space 4} 8.38e-08{col 78}{space 3} 3.56e-07
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .1298598{col 37}{space 2} .0176627{col 48}{space 1}    7.35{col 57}{space 3}0.000{col 65}{space 4} .0952415{col 78}{space 3} .1644781
+{txt}{space 19}ID11 {c |}{col 25}{res}{space 2} .1122244{col 37}{space 2} .0497671{col 48}{space 1}    2.25{col 57}{space 3}0.024{col 65}{space 4} .0146828{col 78}{space 3} .2097661
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2}-.0001244{col 37}{space 2} .0028655{col 48}{space 1}   -0.04{col 57}{space 3}0.965{col 65}{space 4}-.0057407{col 78}{space 3} .0054919
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .0036371{col 37}{space 2}  .095999{col 48}{space 1}    0.04{col 57}{space 3}0.970{col 65}{space 4}-.1845176{col 78}{space 3} .1917917
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2} .1319629{col 37}{space 2} .1003477{col 48}{space 1}    1.32{col 57}{space 3}0.188{col 65}{space 4} -.064715{col 78}{space 3} .3286407
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} .6433287{col 37}{space 2} .1199611{col 48}{space 1}    5.36{col 57}{space 3}0.000{col 65}{space 4} .4082092{col 78}{space 3} .8784481
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} 1.332693{col 37}{space 2} .1787194{col 48}{space 1}    7.46{col 57}{space 3}0.000{col 65}{space 4} .9824099{col 78}{space 3} 1.682977
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2} .1728941{col 37}{space 2} .1437335{col 48}{space 1}    1.20{col 57}{space 3}0.229{col 65}{space 4}-.1088183{col 78}{space 3} .4546065
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} .0211235{col 37}{space 2} .1876104{col 48}{space 1}    0.11{col 57}{space 3}0.910{col 65}{space 4}-.3465861{col 78}{space 3} .3888332
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2}-1.853867{col 37}{space 2} .4072731{col 48}{space 1}   -4.55{col 57}{space 3}0.000{col 65}{space 4}-2.652108{col 78}{space 3}-1.055626
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg female_occupation HHEDUCF INCOME ED12 ID11 STATEID i.GROUP
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     5,057
+{txt}{hline 13}{c +}{hline 34}   F(11, 5045)     = {res}    22.13
+{txt}       Model {c |} {res} 57.7407964        11  5.24916331   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 1196.45379     5,045   .23715635   {txt}R-squared       ={res}    0.0460
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0440
+{txt}       Total {c |} {res} 1254.19458     5,056  .248060637   {txt}Root MSE        =   {res} .48699
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Coefficient{col 37}  Std. err.{col 49}      t{col 57}   P>|t|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 16}HHEDUCF {c |}{col 25}{res}{space 2} .0141614{col 37}{space 2} .0062659{col 48}{space 1}    2.26{col 57}{space 3}0.024{col 65}{space 4} .0018775{col 78}{space 3} .0264454
+{txt}{space 17}INCOME {c |}{col 25}{res}{space 2} 5.01e-08{col 37}{space 2} 1.50e-08{col 48}{space 1}    3.35{col 57}{space 3}0.001{col 65}{space 4} 2.08e-08{col 78}{space 3} 7.95e-08
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} .0312406{col 37}{space 2} .0041711{col 48}{space 1}    7.49{col 57}{space 3}0.000{col 65}{space 4} .0230636{col 78}{space 3} .0394177
+{txt}{space 19}ID11 {c |}{col 25}{res}{space 2} .0237341{col 37}{space 2} .0109869{col 48}{space 1}    2.16{col 57}{space 3}0.031{col 65}{space 4} .0021951{col 78}{space 3} .0452731
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2}-.0000594{col 37}{space 2} .0006813{col 48}{space 1}   -0.09{col 57}{space 3}0.930{col 65}{space 4} -.001395{col 78}{space 3} .0012761
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} .0008578{col 37}{space 2} .0227621{col 48}{space 1}    0.04{col 57}{space 3}0.970{col 65}{space 4}-.0437657{col 78}{space 3} .0454814
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2} .0316713{col 37}{space 2} .0238322{col 48}{space 1}    1.33{col 57}{space 3}0.184{col 65}{space 4}-.0150502{col 78}{space 3} .0783928
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} .1565941{col 37}{space 2} .0285319{col 48}{space 1}    5.49{col 57}{space 3}0.000{col 65}{space 4} .1006591{col 78}{space 3} .2125291
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} .3095273{col 37}{space 2} .0399835{col 48}{space 1}    7.74{col 57}{space 3}0.000{col 65}{space 4} .2311423{col 78}{space 3} .3879124
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2} .0448671{col 37}{space 2} .0340272{col 48}{space 1}    1.32{col 57}{space 3}0.187{col 65}{space 4}-.0218409{col 78}{space 3} .1115752
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} .0143511{col 37}{space 2} .0431706{col 48}{space 1}    0.33{col 57}{space 3}0.740{col 65}{space 4}-.0702822{col 78}{space 3} .0989843
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2} .0627038{col 37}{space 2} .0948828{col 48}{space 1}    0.66{col 57}{space 3}0.509{col 65}{space 4}-.1233076{col 78}{space 3} .2487153
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. logistic  female_occupation HHEDUCF INCOME ED12 ID11 STATEID i.GROUP
+{res}
+{txt}Logistic regression{col 57}{lalign 13:Number of obs}{col 70} = {res}{ralign 6:5,057}
+{txt}{col 57}{lalign 13:LR chi2({res:11})}{col 70} = {res}{ralign 6:238.31}
+{txt}{col 57}{lalign 13:Prob > chi2}{col 70} = {res}{ralign 6:0.0000}
+{txt}Log likelihood = {res:-3365.9545}{col 57}{lalign 13:Pseudo R2}{col 70} = {res}{ralign 6:0.0342}
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      female_occupation{col 25}{c |} Odds ratio{col 37}   Std. err.{col 49}      z{col 57}   P>|z|{col 65}     [95% con{col 78}f. interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 16}HHEDUCF {c |}{col 25}{res}{space 2}  1.06209{col 37}{space 2} .0285203{col 48}{space 1}    2.24{col 57}{space 3}0.025{col 65}{space 4} 1.007637{col 78}{space 3} 1.119486
+{txt}{space 17}INCOME {c |}{col 25}{res}{space 2}        1{col 37}{space 2} 6.94e-08{col 48}{space 1}    3.17{col 57}{space 3}0.002{col 65}{space 4}        1{col 78}{space 3}        1
+{txt}{space 19}ED12 {c |}{col 25}{res}{space 2} 1.138669{col 37}{space 2}  .020112{col 48}{space 1}    7.35{col 57}{space 3}0.000{col 65}{space 4} 1.099925{col 78}{space 3} 1.178778
+{txt}{space 19}ID11 {c |}{col 25}{res}{space 2} 1.118764{col 37}{space 2} .0556776{col 48}{space 1}    2.25{col 57}{space 3}0.024{col 65}{space 4} 1.014791{col 78}{space 3}  1.23339
+{txt}{space 16}STATEID {c |}{col 25}{res}{space 2} .9998756{col 37}{space 2} .0028652{col 48}{space 1}   -0.04{col 57}{space 3}0.965{col 65}{space 4} .9942758{col 78}{space 3} 1.005507
+{txt}{space 23} {c |}
+{space 17}GROUPS {c |}
+{space 7}Forward caste 2  {c |}{col 25}{res}{space 2} 1.003644{col 37}{space 2} .0963488{col 48}{space 1}    0.04{col 57}{space 3}0.970{col 65}{space 4} .8315053{col 78}{space 3} 1.211418
+{txt}{space 17}OBC 3  {c |}{col 25}{res}{space 2} 1.141066{col 37}{space 2} .1145033{col 48}{space 1}    1.32{col 57}{space 3}0.188{col 65}{space 4} .9373346{col 78}{space 3} 1.389079
+{txt}{space 15}Dalit 4  {c |}{col 25}{res}{space 2} 1.902804{col 37}{space 2} .2282625{col 48}{space 1}    5.36{col 57}{space 3}0.000{col 65}{space 4} 1.504122{col 78}{space 3} 2.407161
+{txt}{space 13}Adivasi 5  {c |}{col 25}{res}{space 2} 3.791241{col 37}{space 2} .6775682{col 48}{space 1}    7.46{col 57}{space 3}0.000{col 65}{space 4} 2.670885{col 78}{space 3} 5.381553
+{txt}{space 14}Muslim 6  {c |}{col 25}{res}{space 2}  1.18874{col 37}{space 2} .1708617{col 48}{space 1}    1.20{col 57}{space 3}0.229{col 65}{space 4} .8968933{col 78}{space 3} 1.575553
+{txt}Christian, Sikh, Jai..  {c |}{col 25}{res}{space 2} 1.021348{col 37}{space 2} .1916155{col 48}{space 1}    0.11{col 57}{space 3}0.910{col 65}{space 4} .7070979{col 78}{space 3} 1.475258
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2} .1566303{col 37}{space 2} .0637913{col 48}{space 1}   -4.55{col 57}{space 3}0.000{col 65}{space 4} .0705025{col 78}{space 3} .3479744
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 2}Note: {bf:_cons} estimates baseline odds{txt}.{p_end}
+
+{com}. margins female_occupation
+{err}factor {bf:female_occupation} not found in list of covariates
+{txt}{search r(322), local:r(322);}
+
+{com}. margins female_occupation , atmean
+{err}factor {bf:female_occupation} not found in list of covariates
+{txt}{search r(322), local:r(322);}
+
+{com}. su female_occupation
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+female_occ~n {c |}{res}     61,184     .332162    .4709926          0          1
+
+{com}. margin ,at( female_occupation=(0 (2) 1))
+{err}variable {bf:female_occupation} not found in list of covariates
+{txt}{search r(322), local:r(322);}
+
+{com}. su ID11
+
+{txt}    Variable {c |}        Obs        Mean    Std. dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 8}ID11 {c |}{res}     61,182    1.324262    .8594914          1          9
+
+{com}. margin ,at(ID11=(1 (2) 9))
+{res}
+{txt}Predictive margins{col 58}{lalign 13:Number of obs}{col 71} = {res}{ralign 5:5,057}
+{txt}{col 1}Model VCE: {res:OIM}
+
+{txt}{p2colset 1 13 13 2}{...}
+{p2col:Expression:}{res:Pr(female_occupation), predict()}{p_end}
+{p2colreset}{...}
+{lalign 7:1._at: }{space 0}{lalign 4:ID11} = {res:{ralign 1:1}}
+{lalign 7:2._at: }{space 0}{lalign 4:ID11} = {res:{ralign 1:3}}
+{lalign 7:3._at: }{space 0}{lalign 4:ID11} = {res:{ralign 1:5}}
+{lalign 7:4._at: }{space 0}{lalign 4:ID11} = {res:{ralign 1:7}}
+{lalign 7:5._at: }{space 0}{lalign 4:ID11} = {res:{ralign 1:9}}
+
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26} Delta-method
+{col 14}{c |}     Margin{col 26}   std. err.{col 38}      z{col 46}   P>|z|{col 54}     [95% con{col 67}f. interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}_at {c |}
+{space 10}1  {c |}{col 14}{res}{space 2}  .445204{col 26}{space 2} .0081686{col 37}{space 1}   54.50{col 46}{space 3}0.000{col 54}{space 4} .4291937{col 67}{space 3} .4612142
+{txt}{space 10}2  {c |}{col 14}{res}{space 2} .4988314{col 26}{space 2} .0206573{col 37}{space 1}   24.15{col 46}{space 3}0.000{col 54}{space 4} .4583438{col 67}{space 3} .5393189
+{txt}{space 10}3  {c |}{col 14}{res}{space 2} .5525825{col 26}{space 2} .0435751{col 37}{space 1}   12.68{col 46}{space 3}0.000{col 54}{space 4} .4671768{col 67}{space 3} .6379882
+{txt}{space 10}4  {c |}{col 14}{res}{space 2} .6052586{col 26}{space 2} .0650396{col 37}{space 1}    9.31{col 46}{space 3}0.000{col 54}{space 4} .4777833{col 67}{space 3}  .732734
+{txt}{space 10}5  {c |}{col 14}{res}{space 2} .6557416{col 26}{space 2} .0833544{col 37}{space 1}    7.87{col 46}{space 3}0.000{col 54}{space 4} .4923699{col 67}{space 3} .8191133
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. marginsplot, xlabel(, angle(40))
+{res}
+{text}{p 0 0 2}Variables that uniquely identify margins: {bf:ID11}{p_end}
+{res}
+{com}. 
+. marginsplot, xlabel(, angle(40))
+{res}
+{text}{p 0 0 2}Variables that uniquely identify margins: {bf:ID11}{p_end}
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_13.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}11 Sep 2025, 13:08:51
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

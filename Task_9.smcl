@@ -1,0 +1,39 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_9.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}13 Sep 2025, 19:38:48
+
+{com}. sysuse auto
+{txt}(1978 automobile data)
+
+{com}. twoway (scatter price mpg)
+{res}
+{com}. twoway (scatter price mpg) (line price mpg)
+{res}
+{com}. twoway (scatter price mpg, mcolor(red))
+{res}
+{com}. twoway (scatter price mpg, mcolor(red) mlabel(foreign))
+{res}
+{com}. twoway (scatter price mpg, mcolor(red) mlabel(foreign) msymbol(square))
+{res}
+{com}. twoway (scatter price mpg, mcolor(red) mlabel(foreign) msymbol(sphere))
+{res}{p 0 4 2}
+{txt}(note:  named style
+sphere not found in class
+symbol,  default attributes used)
+{p_end}
+{res}
+{com}. twoway (scatter price mpg, mcolor(red) mlabel(foreign) mlabsize(tiny))
+{res}
+{com}. twoway (scatter price mpg, mcolor(red) mlabel(foreign) mlabsize(tiny) mlabpos(9))
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\Stata Lab record 2025\Task_9.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}13 Sep 2025, 19:46:11
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

@@ -1,0 +1,72 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\STATA ASSIGNMENT 1\Task_1.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}23 Aug 2025, 23:36:03
+
+{com}. sysuse nlsw88
+{txt}(NLSW, 1988 extract)
+
+{com}. tab race
+
+       {txt}Race {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+      White {c |}{res}      1,637       72.89       72.89
+{txt}      Black {c |}{res}        583       25.96       98.84
+{txt}      Other {c |}{res}         26        1.16      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. tab race,nolabel
+
+       {txt}Race {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          1 {c |}{res}      1,637       72.89       72.89
+{txt}          2 {c |}{res}        583       25.96       98.84
+{txt}          3 {c |}{res}         26        1.16      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. gen race1=0 if race==1
+{txt}(609 missing values generated)
+
+{com}. replace race1=1 if race==1
+{txt}(1,637 real changes made)
+
+{com}. replace race1=0 if race==2
+{txt}(583 real changes made)
+
+{com}. replace race1=0 if race==3
+{txt}(26 real changes made)
+
+{com}. label define today 1 "white" 0 "colour"
+
+. label value race1 today
+
+. tab race1
+
+      {txt}race1 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+     colour {c |}{res}        609       27.11       27.11
+{txt}      white {c |}{res}      1,637       72.89      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. tab race1,nolabel
+
+      {txt}race1 {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+          0 {c |}{res}        609       27.11       27.11
+{txt}          1 {c |}{res}      1,637       72.89      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}      2,246      100.00
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\Aakash\OneDrive\Desktop\STATA ASSIGNMENT 1\Task_1.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}23 Aug 2025, 23:38:00
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}
